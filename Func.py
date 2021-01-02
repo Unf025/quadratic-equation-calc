@@ -12,3 +12,13 @@ print ('z = ',z) # выводим значение y
 variable= add(500,-500)
 print ('zvariable = ',variable)
 
+
+a = int(input("a= "))#Ввод 1го числа.
+b = int(input("b= "))#Ввод 2го числа .
+c = int(input("c= "))  #Ввод 3го числа.
+
+input_data = { 'a' : 0,
+               'b' : 0,
+               'c' : 0            
+}
+
