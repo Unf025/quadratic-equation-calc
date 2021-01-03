@@ -18,71 +18,72 @@ def MenuSelEquat():
 	return input("")
 
 num = MenuSelEquat()
+def GetInputData():
+    data  = { 'a' : int(input("a= ")), # поскольку из названии функции нам ясно что данные вводимые, то назовем словарь просто дата
+              'b' : int(input("b= ")),
+              'c' : int(input("c= "))            
+    }
+    return data # функция возвращает данный словарь. 
+
+
+
+def SolvQuadEquat(input):
+		d = input['b']**2 - 4 * input['a'] * input['c'] #Нахождение дискриминанта.
+		print('Дискриминант = ', d) 
+		if d > 0:
+			print("2 корня")
+			x1 = (-input['b'] + sqrt(d)) / (2*input['a']) # Нахождение корней.
+			x2 = (-input['b'] - sqrt(d)) / (2*input['a'])
+		elif d == 0:
+			print("1 корень")
+			x1 = -input['b']/(2*input['a'])
+			x2 = None
+		else:
+			x1 = None
+			x2 = None
+			print('Нет действительных корней') # на самом деле корни есть, но они находяться на мнимой оси координат, которую в школе не проходят)	
+		return ({"x1":x1,"x2":x2, "d":d}) 
+
+
 while num != "exit":
 	if num == '1': #Квадратное уравнение. 
 		print("ax^2 + bx + c = 0") #Вид квадратного уравнения.
 
-		a = int(input("a= "))#Ввод 1го числа.
-		b = int(input("b= "))#Ввод 2го числа .
-		c = int(input("c= "))  #Ввод 3го числа.
+		input_data = GetInputData()
+		
+		result = SolvQuadEquat(input_data)
+		print("Ответ:")
+		print("x1= %.2f" % (result['x1']))
+		print("x2= %.2f" % (result['x2']))
+		#print("Ответ: x1= %.2f; x2= %.2f" % (result['x1'], result['x2']))
 
-		d = b**2 - 4 * a * c #Нахождение дискриминанта.
-		print('Дискриминант = ', d) 
-		if d > 0:
-			print("2 корня")
-			x1 = (-b + sqrt(d)) / (2*a) # Нахождение корней.
-			x2 = (-b - sqrt(d)) / (2*a)
-			print("x1= %.2f" % (x1))
-			print("x2= %.2f" % (x2))
-			print("Ответ: x1= %.2f; x2= %.2f" % (x1, x2))
-			# Кусочек кода для рисования графика много читать чтобы разобраться
-		# сразу может показаться дичью, просто накидаю ссылок, а потом обьясню
-			x = np.linspace(x1, x2, 201) # https://pythonist.ru/funkczii-numpy-linspace-i-numpy-logspace/ 
-			y = lambda x,a,b,c: a*x ** 2 +b * x +c # https://pythonworld.ru/tipy-dannyx-v-python/vse-o-funkciyax-i-ix-argumentax.html
-			
-			plt.plot(x, y(x,a,b,c)) # построить график по оси икс откладывая массив х, а по у вызываем функцию, которая посчитает значения у
-			plt.show() # показать этот график в окне
-			# корни уравнения будут пересекать 0 по оси у.
-
-		elif d == 0:
-			print("1 корень")
-			print('x=', -b/(2*a))# Нахождение единственного корня.
-			print('Ответ: х= %.2f' % (-b/(2*a)))
-		else:
-			print('Нет действительных корней') # на самом деле корни есть, но они находяться на мнимой оси координат, которую в школе не проходят)	
-
+		
 	elif num == '2': #Биквадратное уравнение
 		print("ax^4 + bx^2 + c = 0") # Вид биквадратного уравнения. 
-		# выставив правильную табуляцию починилось 	
-		a1= int(input("a= "))# первый или старший коэффициент
-		b1= int(input("b= "))# второй коэффициент
-		c1= int(input("c= "))# свободный член
 		print('x^2 = t')
 		print('at^2 + bt + c = 0')
-		d1 = b1**2 - 4 * a1 * c1 #Нахождение дискриминанта.
-		print('Дискриминант = ', d1) 
-		if d1 > 0:
-			print("2 корня")
-			t1 = (-b1 + sqrt(d1)) / (2*a1) #Нахождение корней.
-			t2 = (-b1 - sqrt(d1)) / (2*a1)
-			print("t1= ", t1)
-			print("t2= ", t2)
-			print("x^2= %.2f; x^2= %.2f" % (t1, t2))
-			if t1 > 0:
-				print('x1=+- %.2f' % (sqrt(t1)))#Вывод на экран корней.
-			if t2 > 0:
+		input_data = GetInputData()
+		
+		result = SolvQuadEquat(input_data)
+		print (result)
+
+		if result ["d"] > 0:
+			# биквадратное
+			print("x^2= %.2f; x^2= %.2f" % (result['x1'], result['x2']))
+
+			if result['x1'] > 0:
+				print('x1=+- %.2f' % (sqrt(result['x1'])))#Вывод на экран корней.
+			if result['x2'] > 0:
 				print('x2=+- %.2f' % (sqrt(t2)))
-				print("Ответ:" 'x1=+- %.2f;x2=+- %.2f' % (sqrt(t1), sqrt(t2)) )
+				print("Ответ:" 'x1=+- %.2f;x2=+- %.2f' % (sqrt(result['x1']), sqrt(result['x2'])))
 			else:
 				print('Решений нет!')
-		elif d1 == 0:
-			print("1 корень")
-			t= -b1/(2*a1)	
-			print('t=', -b1/(2*a1))#Нахождение единстветнного корня.
+		elif result ['d'] == 0: 
+			# биквадратное
 			print('x^2= ', t)
 			print("x= ", sqrt(t))
 		else:
-			print('Корней не имеет!')
+			print('Нет действительных корней')
 	else:
 		print("Вы выбрали несуществующий пункт меню!")
 	num = MenuSelEquat()
