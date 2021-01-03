@@ -53,9 +53,15 @@ while num != "exit":
 		
 		result = SolvQuadEquat(input_data)
 		print("Ответ:")
-		print("x1= %.2f" % (result['x1']))
-		print("x2= %.2f" % (result['x2']))
-		#print("Ответ: x1= %.2f; x2= %.2f" % (result['x1'], result['x2']))
+		if result['x1'] != None:
+			 print("x1= %.2f" % (result['x1']))
+		else:
+			print("x1= нету")
+		if result['x2'] != None:
+			 print("x2= %.2f" % (result['x2']))
+		else:
+			print("x2= нету")
+		
 
 		
 	elif num == '2': #Биквадратное уравнение
@@ -65,25 +71,32 @@ while num != "exit":
 		input_data = GetInputData()
 		
 		result = SolvQuadEquat(input_data)
-		print (result)
-
-		if result ["d"] > 0:
-			# биквадратное
-			print("x^2= %.2f; x^2= %.2f" % (result['x1'], result['x2']))
-
-			if result['x1'] > 0:
-				print('x1=+- %.2f' % (sqrt(result['x1'])))#Вывод на экран корней.
-			if result['x2'] > 0:
-				print('x2=+- %.2f' % (sqrt(t2)))
-				print("Ответ:" 'x1=+- %.2f;x2=+- %.2f' % (sqrt(result['x1']), sqrt(result['x2'])))
-			else:
-				print('Решений нет!')
-		elif result ['d'] == 0: 
-			# биквадратное
-			print('x^2= ', t)
-			print("x= ", sqrt(t))
+		if result['x1'] != None:
+			 print("t1= %.2f" % (result['x1']))
 		else:
-			print('Нет действительных корней')
+			print("t1= нету")
+		if result['x2'] != None:
+			 print("t2= %.2f" % (result['x2']))
+		else:
+			print("t2= нету")
+		if result ["d"] > 0:
+			print("x1^2= %.2f; x2^2= %.2f" % (result['x1'], result['x2']))
+
+			print("Ответ:")
+			if result['x1'] > 0:
+				print('x1= %.2f' % (sqrt(result['x1'])))#Вывод на экран корней.
+				print('x2=- %.2f' % (sqrt(result['x1'])))
+			if result['x2'] > 0:
+				print('x3= %.2f' % (sqrt(result['x2'])))
+				print('x4=- %.2f' % (sqrt(result['x2'])))
+				
+			else:
+				print('x3 = None')
+				print('x4 = None')
+		elif result ['d'] == 0: 
+			print('x^2= ', result['x1'])
+			print("x=+- ", sqrt(result['x1']))
+
 	else:
 		print("Вы выбрали несуществующий пункт меню!")
 	num = MenuSelEquat()
