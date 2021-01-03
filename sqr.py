@@ -41,6 +41,8 @@ while num != "exit":
 			y = lambda x,a,b,c: a*x ** 2 +b * x +c # https://pythonworld.ru/tipy-dannyx-v-python/vse-o-funkciyax-i-ix-argumentax.html
 			
 			plt.plot(x, y(x,a,b,c)) # построить график по оси икс откладывая массив х, а по у вызываем функцию, которая посчитает значения у
+			plt.axhline(y=0, color='k')
+			plt.axvline(x=0, color='k')
 			plt.show() # показать этот график в окне
 			# корни уравнения будут пересекать 0 по оси у.
 
