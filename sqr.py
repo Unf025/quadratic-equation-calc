@@ -8,6 +8,9 @@
 
 import numpy as np # подключение крутой библиотеки numpy -https://pythonworld.ru/numpy/1.html. !!! поначалу может быть непонятно
 import matplotlib.pyplot as plt # подключение крутой библиотеки  matplotlib - https://nbviewer.jupyter.org/github/whitehorn/Scientific_graphics_in_python/blob/master/P1%20Chapter%201%20Pyplot.ipynb
+#import Tkinter # для pyinstaller чтоб работал с matplotlib
+#import FileDialog # для pyinstaller чтоб работал с matplotlib
+
 
 from math  import sqrt # Говорим программе, что здесь будут математические вычисления и подключаем функцию квадратных корней
 def MenuSelEquat(): # Создаем функцию выбора меню 
